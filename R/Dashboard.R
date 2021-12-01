@@ -4,37 +4,34 @@ library(ggplot2)
 
 shinyServer(function(input, output) {
   
-  githubURL<-("C:/Users/Piper Zimmerman/Downloads/data-2021-11-30_20_14_58")
+  githubURL<-("C:/Users/Piper Zimmerman/Downloads/Stocks.RDS")
   data<-readRDS(githubURL)
   
-  weight<-reactive({
+  Investment<-reactive({
     
-    weight<-data.frame(symbol=character(),weights=numeric())
+    Investment<-data.frame(symbol=character(),weights=numeric())
     
     if(!is.null(input$var1)){
-      weight<-weight%>%add_row(symbol='AAPL',weights=input$var1)
+      Investment<-Investment%>%add_row(symbol='AAPL',weights=input$var1)
     }
     if(!is.null(input$var2)){
-      weight<-weight%>%add_row(symbol='TSLA',weights=input$var2)
+      Investment<-Investment%>%add_row(symbol='MRNA',weights=input$var2)
     }
     if(!is.null(input$var3)){
-      weight<-weight%>%add_row(symbol='SPY',weights=input$var3)
+      Investment<-Investment%>%add_row(symbol='NKE',weights=input$var3)
     }
     if(!is.null(input$var4)){
-      weight<-weight%>%add_row(symbol='PG',weights=input$var4)
+      Investment<-Investment%>%add_row(symbol='CMG',weights=input$var4)
     }
-    if(!is.null(input$var5)){
-      weight<-weight%>%add_row(symbol='TWTR',weights=input$var5)
-    }
-    weight$weights<-weight$weights/sum(weight$weights)
-    return(weight)
+    Investment$weights<-Investment$weights/sum(Investment$weights)
+    return(Investment)
   })
   
   reactive_data <- reactive({
     data %>%
       filter(symbol %in% input$symbol) %>%
       filter(date >= input$dateRange[1] & date<= input$dateRange[2]) %>%
-      left_join(weight(),by = "symbol")
+      left_join(Investment(),by = "symbol")
   }) 
   
   
