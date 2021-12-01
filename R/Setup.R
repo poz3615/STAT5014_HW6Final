@@ -2,7 +2,7 @@ library("shiny")
 
 shinyUI(pageWithSidebar(
   
-  headerPanel("Flexdashboard"),
+  headerPanel("INVESTMENTS"),
   
   sidebarPanel(
     selectInput("symbol", "Stock", 
@@ -19,18 +19,18 @@ shinyUI(pageWithSidebar(
     ),
     
     conditionalPanel(
-      condition = "input.symbol.indexOf('TSLA') > -1",
+      condition = "input.symbol.indexOf('MRNA') > -1",
       numericInput("var2","Investment MRNA","0")
     ),
     
     conditionalPanel(
-      condition = "input.symbol.indexOf('SPY') > -1",
+      condition = "input.symbol.indexOf('NKE') > -1",
       numericInput("var3","Investment NKE","0")
     ),
     
      
     conditionalPanel(
-      condition = "input.symbol.indexOf('PG') > -1",
+      condition = "input.symbol.indexOf('CMG') > -1",
       numericInput("var4","Investment CMG","0")
     ),
    
