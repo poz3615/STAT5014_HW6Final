@@ -6,7 +6,7 @@ output:
   html_document:
     df_print: paged
 params:
-  symbols: AAPL
+  symbols: ["AAPL","MRNA","NKE", "CMG"]
   show_code: yes
 ---
 
@@ -47,4 +47,5 @@ kable(stock_data_tbl,caption="Last 7 days of market close")
 # save data 
 # do you want to have a single running RDS file, or a file for every time this runs
 # up to you to decide
+saveRDS(stock_data_tbl, "../data/Stocks.RDS")
 ```
